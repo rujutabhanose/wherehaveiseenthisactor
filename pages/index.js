@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import { ACTOR_NOTES } from '../lib/actorNotes';
 
 const IMG_BASE = 'https://image.tmdb.org/t/p';
 const poster = (p, s = 'w342') => p ? `${IMG_BASE}/${s}${p}` : null;
@@ -14,6 +15,8 @@ function useDebounce(val, ms) {
 }
 
 const WATCHED_KEY = 'watched_list';
+
+const noteFor = (actorId) => ACTOR_NOTES[actorId] || null;
 
 function useWatchlist() {
   const [watched, setWatched] = useState([]);
@@ -103,6 +106,11 @@ function StarRating({ vote }) {
 }
 
 // ─── Search Dropdown ─────────────────────────────────────────────────────────
+function NoteChip({ text }) {
+  if (!text) return null;
+  return <span className={styles.noteChip} title={text}>🏷 {text}</span>;
+}
+
 function SearchDropdown({ results, onSelect, loading, type = 'media' }) {
   if (!results.length && !loading) return null;
   return (
@@ -401,6 +409,8 @@ export default function Home() {
       <Head>
         <title>Where Have I Seen This Actor?</title>
         <meta name="description" content="Track your watched shows and movies. Discover where you've seen any actor before." />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="theme-color" content="#0a0a0f" />
         <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>" />
       </Head>
 
@@ -542,6 +552,9 @@ export default function Home() {
                     />
                     <div className={styles.actorMeta}>
                       <h3 className={`display-font ${styles.actorName}`}>{selectedActor.name}</h3>
+                      {noteFor(selectedActor.id) && (
+                        <NoteChip text={noteFor(selectedActor.id)} />
+                      )}
                       {actorData?.details?.birthday && (
                         <span className={styles.actorDetail}>
                           Born {actorData.details.birthday}

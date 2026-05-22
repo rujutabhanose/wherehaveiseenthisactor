@@ -83,6 +83,7 @@
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
 }
 
@@ -911,4 +912,146 @@
 .castCharacter em {
   font-style: italic;
   color: var(--accent);
+}
+
+/* ── Personal note chip (shown beside an actor's name) ─────────────────────── */
+.noteChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  align-self: flex-start;
+  background: var(--gold-bg);
+  color: var(--gold);
+  border: 1px solid rgba(247, 197, 159, 0.3);
+  border-radius: 100px;
+  padding: 3px 10px;
+  font-size: 11px;
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 0.02em;
+  margin-top: 4px;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+
+/* Tablet & stacked layout */
+@media (max-width: 900px) {
+  .leftCol {
+    position: static;
+    top: auto;
+  }
+  .watchedList {
+    max-height: 50vh;
+  }
+}
+
+/* Phones */
+@media (max-width: 640px) {
+  .header {
+    padding: 10px 0;
+  }
+  .headerInner {
+    gap: 12px;
+  }
+  .logoSub {
+    display: none;
+  }
+  .statNum {
+    font-size: 22px;
+  }
+  .main {
+    padding-top: 20px;
+    padding-bottom: 32px;
+  }
+  .sectionTitle {
+    font-size: 17px;
+  }
+
+  .actorHero {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 16px;
+    gap: 12px;
+  }
+  .actorMeta {
+    align-items: center;
+  }
+  .actorPhoto {
+    width: 96px;
+    height: 96px;
+  }
+  .actorName {
+    font-size: 22px;
+  }
+  .actorStats {
+    justify-content: center;
+  }
+
+  .filterRow {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .tabs {
+    justify-content: stretch;
+  }
+  .tab {
+    flex: 1;
+    text-align: center;
+  }
+  .seenFilter {
+    text-align: center;
+  }
+
+  .worksGrid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 10px;
+  }
+  .workInfo {
+    padding: 8px;
+  }
+  .workTitle {
+    font-size: 11px;
+  }
+
+  .seenToggle {
+    width: 32px;
+    height: 32px;
+    font-size: 18px;
+  }
+
+  /* Modal: slide up from bottom on phones */
+  .modalBackdrop {
+    padding: 0;
+    align-items: flex-end;
+  }
+  .modal {
+    max-width: 100%;
+    max-height: 92vh;
+    border-radius: var(--radius) var(--radius) 0 0;
+    border-bottom: none;
+  }
+  .modalHeader {
+    padding: 16px 16px 12px;
+  }
+  .modalTitle {
+    font-size: 18px;
+  }
+  .castItem {
+    padding: 8px 10px;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 380px) {
+  .statNum {
+    font-size: 18px;
+  }
+  .worksGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
