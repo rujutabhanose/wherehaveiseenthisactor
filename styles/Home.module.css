@@ -980,6 +980,9 @@
   .actorMeta {
     align-items: center;
   }
+  .noteChip {
+    align-self: center;
+  }
   .actorPhoto {
     width: 96px;
     height: 96px;
